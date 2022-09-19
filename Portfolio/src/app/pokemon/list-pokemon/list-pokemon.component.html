@@ -1,0 +1,21 @@
+<div class="container" >
+    <div class="row" >
+        <div class="col l4 m6 s12" *ngFor = "let toto of pokemonList" >
+            <div (click)="goToPokemon(toto)" class="card horizontal"  pkmnBorderCard>
+                <div class="card-image">
+                    <img src="{{toto.picture}}" alt="this place for image">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div class="card-title">{{toto.name}}</div>
+                        <p><span>{{toto.created | date:"dd/MM/YYYY"}}</span></p>
+                        <span *ngFor = "let type of toto.types" class="{{type|pokemonTypeColor}}">
+                         {{type}}
+                        </span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
