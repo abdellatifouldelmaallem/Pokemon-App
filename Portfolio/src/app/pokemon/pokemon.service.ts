@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { POKEMONS } from './mock-pokemons';
 import { Pokemon } from './pokemon';
@@ -5,7 +6,12 @@ import { Pokemon } from './pokemon';
 @Injectable()
 export class PokemonService {
 
-  table = [];
+  // table = [];
+
+  constructor(
+    private http:HttpClientModule
+    ){}
+
 
  getPokemonList(): Pokemon[]{
      return POKEMONS;
