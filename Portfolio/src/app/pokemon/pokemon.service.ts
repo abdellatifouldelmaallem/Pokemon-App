@@ -16,22 +16,25 @@ export class PokemonService {
 
  getPokemonList(): Observable<Pokemon[]>{
      return this.http.get<Pokemon[]>('api/pokemons').pipe(
-      tap((pokemonList)=>console.table(pokemonList)),
-      catchError((error)=>{
-        console.log(error);
-        return of([]);
-      })
-     )
+      tap((res)=>this.log(res)),
+      catchError((error)=> this.handleError(error,[]))
+     );
  }
 
  getPokemonById(pokemonId:number):Observable <Pokemon|undefined>{
   return this.http.get<Pokemon>(`api/pokemon/${pokemonId}`).pipe(
-    tap((pokemonId)=>console.log(pokemonId)),
-    catchError((error)=>{
-      console.log(error);
-      return of(undefined);
-    })
-   )
+    tap((res)=>this.log(res)),
+    catchError((error)=> this.handleError(error,undefined))
+   );
+ }
+
+ private log(response : Pokemon[]|Pokemon|undefined ){
+      console.table(response)
+ }
+
+ private handleError(error:Error,errorValue:any){
+  console.error(error)
+  return of(errorValue);
  }
 
  getPokemonTypeList():string[]{
